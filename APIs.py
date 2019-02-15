@@ -12,7 +12,7 @@ posts = db.ReutersDataset
 app = Flask(__name__)
 
 #API endpoint to list all contents
-@app.route('/api/reuters',methods=['GET'])
+@app.route('/api/reuters/articles',methods=['GET'])
 def getAllArticles():
     params = (request.query_string).decode("utf-8")
     if(params==""):
@@ -21,12 +21,12 @@ def getAllArticles():
         return "Error! Please do not enter parameters!",500
 
 #API endpoint to get content by unique identifier
-@app.route('/api/reuters/id/<int:article_id>',methods=['GET'])
+@app.route('/api/reuters/articles/<int:article_id>',methods=['GET'])
 def getArticleById(article_id):
     return dumps(posts.find_one({'_id':article_id}))
 
 #API endpoint to get content by any attributes
-@app.route('/api/reuters/attributes',methods=['GET'])
+@app.route('/api/reuters/articles/attributes',methods=['GET'])
 def getArticleByAttributes():
     params = (request.query_string).decode("utf-8")
     acceptedParams = ['id','date','topics','places','people','orgs','exchanges','companies','title','dateline','body']
