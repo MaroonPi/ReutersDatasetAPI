@@ -12,7 +12,7 @@ posts = db.ReutersDataset
 app = Flask(__name__)
 
 #API endpoint to list all contents
-@app.route('/api/reuters/all',methods=['GET'])
+@app.route('/api/reuters',methods=['GET'])
 def getAllArticles():
     params = (request.query_string).decode("utf-8")
     if(params==""):
