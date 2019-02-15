@@ -21,17 +21,9 @@ def getAllArticles():
         return "Error! Please do not enter parameters!",500
 
 #API endpoint to get content by unique identifier
-@app.route('/api/reuters/identifier',methods=['GET'])
-def getArticleById():
-    params = (request.query_string).decode("utf-8")
-    if(params==""):
-        return "Error! Please enter ID!",500
-    else:
-        params = params.split('&')
-        if(len(params)==1 and params[0].split('=')[0]=='id'):
-            return dumps(posts.find_one({'_id':int(params[0].split('=')[1])}))
-        else:
-            return "Error! ID only!",500
+@app.route('/api/reuters/id/<int:article_id>',methods=['GET'])
+def getArticleById(article_id):
+    return dumps(posts.find_one({'_id':article_id}))
 
 #API endpoint to get content by any attributes
 @app.route('/api/reuters/attributes',methods=['GET'])
